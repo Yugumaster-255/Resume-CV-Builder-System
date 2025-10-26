@@ -1,4 +1,4 @@
-# M-SHAURI AI Resume Builder
+# AI Resume Builder
 
 A modern, fully frontend-based Resume Builder web application that allows users to create, preview, and download ATS-friendly CVs with offline AI assistance. Built with HTML, CSS, and JavaScript only - no backend required!
 
@@ -193,4 +193,4 @@ If you encounter any issues or have questions:
 
 **Built with ❤️ for the Tanzanian and East African job market**
 
-*M-SHAURI AI Resume Builder - Your professional resume, powered by AI*
+*AI Resume Builder - Your professional resume, powered by AI*
