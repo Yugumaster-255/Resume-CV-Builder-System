@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Builder</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-file-alt"></i>
+                    <h1> AI Resume Builder</h1>
+                </div>
+                <div class="header-controls">
+                    <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="template-toggle" id="templateToggle" title="Switch between Modern and Classic templates">
+                        <i class="fas fa-palette"></i>
+                        <span>Modern</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Sidebar Navigation -->
+            <nav class="sidebar">
+                <div class="nav-section">
+                    <h3>Resume Sections</h3>
+                    <ul class="nav-list">
+                        <li><a href="#personal" class="nav-link active" data-section="personal">
+                            <i class="fas fa-user"></i>
+                            <span>Personal Details</span>
+                        </a></li>
+                        <li><a href="#education" class="nav-link" data-section="education">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Education</span>
+                        </a></li>
+                        <li><a href="#experience" class="nav-link" data-section="experience">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Work Experience</span>
+                        </a></li>
+                        <li><a href="#skills" class="nav-link" data-section="skills">
+                            <i class="fas fa-tools"></i>
+                            <span>Skills</span>
+                        </a></li>
+                        <li><a href="#certifications" class="nav-link" data-section="certifications">
+                            <i class="fas fa-certificate"></i>
+                            <span>Certifications</span>
+                        </a></li>
+                        <li><a href="#languages" class="nav-link" data-section="languages">
+                            <i class="fas fa-language"></i>
+                            <span>Languages</span>
+                        </a></li>
+                        <li><a href="#hobbies" class="nav-link" data-section="hobbies">
+                            <i class="fas fa-heart"></i>
+                            <span>Hobbies</span>
+                        </a></li>
+                        <li><a href="#referees" class="nav-link" data-section="referees">
+                            <i class="fas fa-users"></i>
+                            <span>Referees</span>
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-actions">
+                    <button class="btn btn-primary" id="previewBtn">
+                        <i class="fas fa-eye"></i>
+                        Preview Resume
+                    </button>
+                    <button class="btn btn-secondary" id="downloadBtn">
+                        <i class="fas fa-download"></i>
+                        Download PDF
+                    </button>
+                    <button class="btn btn-outline" id="exportBtn">
+                        <i class="fas fa-save"></i>
+                        Export Data
+                    </button>
+                    <button class="btn btn-outline" id="importBtn">
+                        <i class="fas fa-upload"></i>
+                        Import Data
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Personal Details Section -->
+                <section id="personal" class="content-section active">
+                    <div class="section-header">
+                        <h2><i class="fas fa-user"></i> Personal Details</h2>
+                        <p>Enter your basic information</p>
+                    </div>
+                    <form class="resume-form" id="personalForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" id="address" name="address" placeholder="e.g., Dar es Salaam, Tanzania">
+                            </div>
+                            <div class="form-group">
+                                <label for="nationality">Nationality</label>
+                                <select id="nationality" name="nationality">
+                                    <option value="">Select Nationality</option>
+                                    <option value="Tanzanian">Tanzanian</option>
+                                    <option value="Kenyan">Kenyan</option>
+                                    <option value="Ugandan">Ugandan</option>
+                                    <option value="Rwandan">Rwandan</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="objective">Career Objective</label>
+                            <div class="ai-suggest-container">
+                                <textarea id="objective" name="objective" rows="4" placeholder="Describe your career goals and what you bring to the table..."></textarea>
+                                <button type="button" class="ai-suggest-btn" data-field="objective">
+                                    <i class="fas fa-magic"></i>
+                                    AI Suggest
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Education Section -->
+                <section id="education" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                        <p>Add your educational background</p>
+                    </div>
+                    <div class="education-container" id="educationContainer">
+                        <div class="education-item">
+                            <form class="resume-form education-form">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Institution *</label>
+                                        <input type="text" name="institution" required placeholder="e.g., University of Dar es Salaam">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Degree/Certificate *</label>
+                                        <input type="text" name="degree" required placeholder="e.g., Bachelor of Science">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Field of Study</label>
+                                        <input type="text" name="field" placeholder="e.g., Computer Science">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Start Date</label>
+                                        <input type="month" name="startDate" title="Select start date">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>End Date</label>
+                                        <input type="month" name="endDate" title="Select end date">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>GPA/Grade</label>
+                                        <input type="text" name="grade" placeholder="e.g., 3.8/4.0">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <div class="ai-suggest-container">
+                                        <textarea name="description" rows="3" placeholder="Describe your academic achievements, relevant coursework, or projects..."></textarea>
+                                        <button type="button" class="ai-suggest-btn" data-field="education">
+                                            <i class="fas fa-magic"></i>
+                                            AI Suggest
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline add-more-btn" id="addEducation">
+                        <i class="fas fa-plus"></i>
+                        Add Another Education
+                    </button>
+                </section>
+
+                <!-- Work Experience Section -->
+                <section id="experience" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
+                        <p>Add your professional experience</p>
+                    </div>
+                    <div class="experience-container" id="experienceContainer">
+                        <div class="experience-item">
+                            <form class="resume-form experience-form">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Job Title *</label>
+                                        <input type="text" name="jobTitle" required placeholder="e.g., Software Developer">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Company *</label>
+                                        <input type="text" name="company" required placeholder="e.g., Tech Solutions Ltd">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Location</label>
+                                        <input type="text" name="location" placeholder="e.g., Dar es Salaam, Tanzania">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Start Date</label>
+                                        <input type="month" name="startDate" title="Select start date">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>End Date</label>
+                                        <input type="month" name="endDate" title="Select end date">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="currentJob"> Currently Working Here
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Employment Type</label>
+                                        <select name="employmentType" title="Select employment type">
+                                            <option value="Full-time">Full-time</option>
+                                            <option value="Part-time">Part-time</option>
+                                            <option value="Contract">Contract</option>
+                                            <option value="Internship">Internship</option>
+                                            <option value="Freelance">Freelance</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Job Description & Achievements</label>
+                                    <div class="ai-suggest-container">
+                                        <textarea name="description" rows="4" placeholder="Describe your responsibilities, achievements, and impact in this role..."></textarea>
+                                        <button type="button" class="ai-suggest-btn" data-field="experience">
+                                            <i class="fas fa-magic"></i>
+                                            AI Suggest
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline add-more-btn" id="addExperience">
+                        <i class="fas fa-plus"></i>
+                        Add Another Experience
+                    </button>
+                </section>
+
+                <!-- Skills Section -->
+                <section id="skills" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-tools"></i> Skills</h2>
+                        <p>Highlight your technical and soft skills</p>
+                    </div>
+                    <form class="resume-form" id="skillsForm">
+                        <div class="form-group">
+                            <label>Technical Skills</label>
+                            <div class="ai-suggest-container">
+                                <textarea id="technicalSkills" name="technicalSkills" rows="3" placeholder="e.g., JavaScript, Python, React, Node.js, MongoDB..."></textarea>
+                                <button type="button" class="ai-suggest-btn" data-field="technicalSkills">
+                                    <i class="fas fa-magic"></i>
+                                    AI Suggest
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Soft Skills</label>
+                            <div class="ai-suggest-container">
+                                <textarea id="softSkills" name="softSkills" rows="3" placeholder="e.g., Leadership, Communication, Problem Solving, Teamwork..."></textarea>
+                                <button type="button" class="ai-suggest-btn" data-field="softSkills">
+                                    <i class="fas fa-magic"></i>
+                                    AI Suggest
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Languages</label>
+                            <div class="ai-suggest-container">
+                                <textarea id="languages-skills" name="languages" rows="2" placeholder="e.g., English (Fluent), Swahili (Native), French (Basic)..."></textarea>
+                                <button type="button" class="ai-suggest-btn" data-field="languages">
+                                    <i class="fas fa-magic"></i>
+                                    AI Suggest
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Certifications Section -->
+                <section id="certifications" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-certificate"></i> Certifications</h2>
+                        <p>Add your professional certifications</p>
+                    </div>
+                    <div class="certifications-container" id="certificationsContainer">
+                        <div class="certification-item">
+                            <form class="resume-form certification-form">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Certification Name *</label>
+                                        <input type="text" name="name" required placeholder="e.g., AWS Certified Developer">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Issuing Organization</label>
+                                        <input type="text" name="organization" placeholder="e.g., Amazon Web Services">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Issue Date</label>
+                                        <input type="month" name="issueDate" title="Select issue date">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Expiry Date</label>
+                                        <input type="month" name="expiryDate" title="Select expiry date">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Credential ID</label>
+                                        <input type="text" name="credentialId" placeholder="e.g., AWS-123456">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Verification URL</label>
+                                        <input type="url" name="verificationUrl" placeholder="https://...">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline add-more-btn" id="addCertification">
+                        <i class="fas fa-plus"></i>
+                        Add Another Certification
+                    </button>
+                </section>
+
+                <!-- Languages Section -->
+                <section id="languages" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-language"></i> Languages</h2>
+                        <p>List your language proficiencies</p>
+                    </div>
+                    <div class="languages-container" id="languagesContainer">
+                        <div class="language-item">
+                            <form class="resume-form language-form">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Language *</label>
+                                        <input type="text" name="language" required placeholder="e.g., English">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Proficiency Level</label>
+                                        <select name="proficiency" title="Select proficiency level">
+                                            <option value="Native">Native</option>
+                                            <option value="Fluent">Fluent</option>
+                                            <option value="Advanced">Advanced</option>
+                                            <option value="Intermediate">Intermediate</option>
+                                            <option value="Basic">Basic</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Certification (Optional)</label>
+                                        <input type="text" name="certification" placeholder="e.g., IELTS 7.5">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline add-more-btn" id="addLanguage">
+                        <i class="fas fa-plus"></i>
+                        Add Another Language
+                    </button>
+                </section>
+
+                <!-- Hobbies Section -->
+                <section id="hobbies" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-heart"></i> Hobbies & Interests</h2>
+                        <p>Share your personal interests and hobbies</p>
+                    </div>
+                    <form class="resume-form" id="hobbiesForm">
+                        <div class="form-group">
+                            <label>Hobbies & Interests</label>
+                            <div class="ai-suggest-container">
+                                <textarea id="hobbies-interests" name="hobbies" rows="4" placeholder="e.g., Photography, Reading, Football, Music, Travel..."></textarea>
+                                <button type="button" class="ai-suggest-btn" data-field="hobbies">
+                                    <i class="fas fa-magic"></i>
+                                    AI Suggest
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Referees Section -->
+                <section id="referees" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-users"></i> Referees</h2>
+                        <p>Add professional references</p>
+                    </div>
+                    <div class="referees-container" id="refereesContainer">
+                        <div class="referee-item">
+                            <form class="resume-form referee-form">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Full Name *</label>
+                                        <input type="text" name="name" required placeholder="e.g., John Doe">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Position/Title</label>
+                                        <input type="text" name="position" placeholder="e.g., Senior Manager">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Company/Organization</label>
+                                        <input type="text" name="company" placeholder="e.g., ABC Company Ltd">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" name="email" placeholder="john.doe@company.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Phone</label>
+                                        <input type="tel" name="phone" placeholder="+255 123 456 789">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Relationship</label>
+                                        <input type="text" name="relationship" placeholder="e.g., Former Supervisor">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline add-more-btn" id="addReferee">
+                        <i class="fas fa-plus"></i>
+                        Add Another Referee
+                    </button>
+                </section>
+            </div>
+        </main>
+
+        <!-- Preview Modal -->
+        <div id="previewModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Resume Preview</h3>
+                    <button class="close-btn" id="closePreview">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="resumePreview"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="downloadFromPreview">
+                        <i class="fas fa-download"></i>
+                        Download PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hidden file input for import -->
+        <input type="file" id="importFile" accept=".json" style="display: none;" title="Import resume data">
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/ai-helper.js"></script>
+    <script src="assets/js/pdf-generator.js"></script>
+</body>
+</html>
